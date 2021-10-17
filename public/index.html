@@ -9,12 +9,25 @@
   <body>
     <h1>My Selfie App</h1>
 
-    <p>Welcome to my selfie app. How may I help you?</p>
+    <p>your location is at:</p>
+    <div>
+      <span id='lat_id'></span><br />
+      <span id='long_id'></span>
+    </div>
 
     <script>
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.latitude, position.coords.longitude);
-      });
+      if ("geolocation" in navigator) {
+        /* geolocation is available */
+        navigator.geolocation.getCurrentPosition((position) => {
+          const lat= position.coords.latitude 
+          const long= position.coords.longitude
+          document.getElementById('lat_id').textContent=lat;
+          document.getElementById('long_id').textContent=long;
+        });
+      } else {
+        /* geolocation IS NOT available */
+        console.log("You don 't have Geolocation")
+      }
     </script>
   </body>
 </html>
