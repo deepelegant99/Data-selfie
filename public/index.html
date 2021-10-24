@@ -14,34 +14,42 @@
       <span id="lat_id"></span><br />
       <span id="long_id"></span>
     </div>
+    <button onclick="submitHandler()">Submit</button>
 
     <script>
+      let lat = 0;
+      let long = 0;
+
       if ("geolocation" in navigator) {
         /* geolocation is available */
         navigator.geolocation.getCurrentPosition((position) => {
-          const lat = position.coords.latitude;
-          const long = position.coords.longitude;
+          lat = position.coords.latitude;
+          long = position.coords.longitude;
+
+          //Change the interface in the client
           document.getElementById("lat_id").textContent = lat;
           document.getElementById("long_id").textContent = long;
-
-          const data = { lat, long };
-
-          const options = {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify(data),
-          };
-
-          fetch("/api", options)
-          .then(res=>res.json())
-          .then(date=>console.log(data))
         });
       } else {
         /* geolocation IS NOT available */
         console.log("You don 't have Geolocation");
       }
+
+      const submitHandler = () => {
+        const data = { lat, long };
+
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(data),
+        };
+
+        fetch("/api", options)
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      };
     </script>
   </body>
 </html>
