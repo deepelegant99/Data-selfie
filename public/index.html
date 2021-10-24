@@ -11,22 +11,36 @@
 
     <p>your location is at:</p>
     <div>
-      <span id='lat_id'></span><br />
-      <span id='long_id'></span>
+      <span id="lat_id"></span><br />
+      <span id="long_id"></span>
     </div>
 
     <script>
       if ("geolocation" in navigator) {
         /* geolocation is available */
         navigator.geolocation.getCurrentPosition((position) => {
-          const lat= position.coords.latitude 
-          const long= position.coords.longitude
-          document.getElementById('lat_id').textContent=lat;
-          document.getElementById('long_id').textContent=long;
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
+          document.getElementById("lat_id").textContent = lat;
+          document.getElementById("long_id").textContent = long;
+
+          const data = { lat, long };
+
+          const options = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(data),
+          };
+
+          fetch("/api", options)
+          .then(res=>res.json())
+          .then(date=>console.log(data))
         });
       } else {
         /* geolocation IS NOT available */
-        console.log("You don 't have Geolocation")
+        console.log("You don 't have Geolocation");
       }
     </script>
   </body>
