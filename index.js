@@ -22,5 +22,11 @@ app.post("/api", (req, res) => {
   const data = req.body;
   data.timestamp = Date.now();
   database.insert(data);
-  res.json(data)
+  res.json(data);
+});
+
+app.get("/api", (req, res) => {
+  database.find({}, (err, data) => {
+    res.json(data);
+  });
 });

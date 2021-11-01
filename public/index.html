@@ -15,13 +15,13 @@
       <span id="long_id"></span>
     </div>
     <br />
-    <input type='text' id='mood' placeholder="Your Mood Now"> 
+    <input type="text" id="mood" placeholder="Your Mood Now" />
     <button onclick="submitHandler()">Submit</button>
 
     <script>
       let lat = 0;
       let long = 0;
-      let mood ="Nothing";
+      let mood = "Nothing";
 
       if ("geolocation" in navigator) {
         /* geolocation is available */
@@ -39,8 +39,7 @@
       }
 
       const submitHandler = () => {
-
-        mood = document.getElementById('mood').value; 
+        mood = document.getElementById("mood").value;
 
         const data = { lat, long, mood };
 
